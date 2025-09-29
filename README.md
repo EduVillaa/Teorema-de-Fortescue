@@ -1,0 +1,1 @@
+El teorema de Fortescue dice que cualquier sistema trifásico desequilibrado puede expresarse como la suma de tres sistemas trifásicos equilibrados; uno de secuencia directa, otro de secuencia inversa y otro de secuencia homopolar
