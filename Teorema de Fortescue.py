@@ -32,12 +32,12 @@ ax.set_aspect("equal")
 plt.grid()
 #Representamos los fasores del sistema trifásico desequilibrado
 dxA, dyA = polar2cart(modulofa, angulofa)
-quiver_faseA = ax.quiver(0, 0, dxA, dyA, angles="xy", scale_units="xy", scale=1, color="cornflowerblue")
+quiver_faseA = ax.quiver(0, 0, dxA, dyA, angles="xy", scale_units="xy", scale=1, color="cornflowerblue", label = "A")
 dxB, dyB = polar2cart(modulofb, angulofb)
-quiver_faseB = ax.quiver(0, 0, dxB, dyB, angles="xy", scale_units="xy", scale=1, color="tomato")
+quiver_faseB = ax.quiver(0, 0, dxB, dyB, angles="xy", scale_units="xy", scale=1, color="tomato", label = "B")
 dxC, dyC = polar2cart(modulofc, angulofc)
-quiver_faseC = ax.quiver(0, 0, dxC, dyC, angles="xy", scale_units="xy", scale=1, color="mediumseagreen")
-
+quiver_faseC = ax.quiver(0, 0, dxC, dyC, angles="xy", scale_units="xy", scale=1, color="mediumseagreen", label = "C")
+ax.legend()
 #Calculamos y representamos los fasores de secuencia homopolar
 sec_homopolar_x = 1/3*(dxA+dxB+dxC)
 sec_homopolar_y = 1/3*(dyA+dyB+dyC)
@@ -76,38 +76,38 @@ quiver_sec_inversa_fc = ax.quiver(np.real(Zsec_directa_fb)+sec_homopolar_x, np.i
 #Escribimos texto con los valores de cada secuencia
 #Secuencia homopolar
 mod_homopolar, arg_homopolar = cart2polar(sec_homopolar_x, sec_homopolar_y)
-texto_sec_homopolar=ax.text(13, 2.7, f"$U_{{a_0}}=U_{{b_0}}=U_{{c_0}}=${mod_homopolar:.2f}∠{arg_homopolar*180/np.pi:.2f}", 
-        fontsize=12, color="k")
+texto_sec_homopolar=ax.text(14, 5, f"$U_{{a_0}}=U_{{b_0}}=U_{{c_0}}=${mod_homopolar:.2f}∠{arg_homopolar*180/np.pi:.2f}", 
+        fontsize=13, color="k")
 #Secuencia directa
 mod_directa = abs(Zsec_directa_fa)
 arg_directa_fa = argZ(Zsec_directa_fa)
 arg_directa_fb = argZ(Zsec_directa_fb)
 arg_directa_fc = argZ(Zsec_directa_fc)
-texto_sec_directa_fa=ax.text(13, -2, f"$U_{{a_1}}=${mod_directa:.2f}∠{arg_directa_fa:.2f}", 
-        fontsize=12, color="k")
-texto_sec_directa_fb=ax.text(13, -3, f"$U_{{b_1}}=${mod_directa:.2f}∠{arg_directa_fb:.2f}", 
-        fontsize=12, color="k")
-texto_sec_directa_fc=ax.text(13, -4, f"$U_{{c_1}}=${mod_directa:.2f}∠{arg_directa_fc:.2f}", 
-        fontsize=12, color="k")
+texto_sec_directa_fa=ax.text(14, 0, f"$U_{{a_1}}=${mod_directa:.2f}∠{arg_directa_fa:.2f}", 
+        fontsize=13, color="k")
+texto_sec_directa_fb=ax.text(14, -1, f"$U_{{b_1}}=${mod_directa:.2f}∠{arg_directa_fb:.2f}", 
+        fontsize=13, color="k")
+texto_sec_directa_fc=ax.text(14, -2, f"$U_{{c_1}}=${mod_directa:.2f}∠{arg_directa_fc:.2f}", 
+        fontsize=13, color="k")
 #Secuencia inversa
 mod_inversa = abs(Zsec_inversa_fa)
 arg_inversa_fa = argZ(Zsec_inversa_fa)
 arg_inversa_fb = argZ(Zsec_inversa_fb)
 arg_inversa_fc = argZ(Zsec_inversa_fc)
-texto_sec_inversa_fa=ax.text(13, -8, f"$U_{{a_2}}=${mod_inversa:.2f}∠{arg_inversa_fa:.2f}", 
-        fontsize=12, color="k")
-texto_sec_inversa_fb=ax.text(13, -9, f"$U_{{b_2}}=${mod_inversa:.2f}∠{arg_inversa_fb:.2f}", 
-        fontsize=12, color="k")
-texto_sec_inversa_fc=ax.text(13, -10, f"$U_{{c_2}}=${mod_inversa:.2f}∠{arg_inversa_fc:.2f}", 
-        fontsize=12, color="k")
+texto_sec_inversa_fa=ax.text(14, -7, f"$U_{{a_2}}=${mod_inversa:.2f}∠{arg_inversa_fa:.2f}", 
+        fontsize=13, color="k")
+texto_sec_inversa_fb=ax.text(14, -8, f"$U_{{b_2}}=${mod_inversa:.2f}∠{arg_inversa_fb:.2f}", 
+        fontsize=13, color="k")
+texto_sec_inversa_fc=ax.text(14, -9, f"$U_{{c_2}}=${mod_inversa:.2f}∠{arg_inversa_fc:.2f}", 
+        fontsize=13, color="k")
 
 #Definimos los ejes del slider
-eje_modulofa = plt.axes([0.72, 0.7, 0.2, 0.02])
-eje_angulofa = plt.axes([0.72, 0.65, 0.2, 0.02])
-eje_modulofb = plt.axes([0.72, 0.5, 0.2, 0.02])
-eje_angulofb = plt.axes([0.72, 0.45, 0.2, 0.02])
-eje_modulofc = plt.axes([0.72, 0.3, 0.2, 0.02])
-eje_angulofc = plt.axes([0.72, 0.25, 0.2, 0.02])
+eje_modulofa = plt.axes([0.72, 0.8, 0.2, 0.02])
+eje_angulofa = plt.axes([0.72, 0.75, 0.2, 0.02])
+eje_modulofb = plt.axes([0.72, 0.6, 0.2, 0.02])
+eje_angulofb = plt.axes([0.72, 0.55, 0.2, 0.02])
+eje_modulofc = plt.axes([0.72, 0.35, 0.2, 0.02])
+eje_angulofc = plt.axes([0.72, 0.3, 0.2, 0.02])
 
 #Definimos los sliders
 slider_modulofa = Slider(eje_modulofa, "Modulo A", 0, 10, valinit=5)
@@ -118,7 +118,7 @@ slider_modulofc = Slider(eje_modulofc, "Modulo C", 0, 10, valinit=5)
 slider_angulofc = Slider(eje_angulofc, "Arg C", 0, 360, valinit=210)
 sliders = [slider_modulofa, slider_angulofa,  slider_modulofb, slider_angulofb, slider_modulofc, slider_angulofc]
 #Boton de reseteo
-ax_button = plt.axes([0.8, 0.025, 0.1, 0.04])
+ax_button = plt.axes([0.83, 0.15, 0.1, 0.04])
 boton = Button(ax_button, "Reset")
 #Funcion que ejecuta el reset
 def reset(event):
@@ -191,7 +191,6 @@ for s in sliders:
 plt.show()
     
     
-
 
 
 
