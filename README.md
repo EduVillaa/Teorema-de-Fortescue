@@ -9,4 +9,9 @@ Este programa permite variar la magnitud y el ángulo de las tres fases de un si
 
 ![Teorema_Fortescue](https://github.com/user-attachments/assets/8e617d5b-9885-48b0-8283-57293409bc09)
 
+## Requisitos
+matplotlib
+numpy
+
+
 
