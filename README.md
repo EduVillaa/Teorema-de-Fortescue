@@ -15,7 +15,7 @@ Este programa permite variar la magnitud y el ángulo de las tres fases de un si
 - Librerías:
   - `numpy`
   - `matplotlib`
-  - `streamlit` (solo si se usa el programa con streamlit.
+  - `streamlit` (solo si se usa el programa con streamlit).
 
 
 
