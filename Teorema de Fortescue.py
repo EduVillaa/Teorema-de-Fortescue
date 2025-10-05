@@ -1,6 +1,6 @@
 #Teorema de Fortescue: Cualquier sistema desequilibrado puede ser representado como superposición de tres sistemas equilibrados,
 #uno de secuencia directa, uno de secuencia inversa, y uno de secuencia homopolar
-from matplotlib.widgets import Slider, Button
+from matplotlib.widgets import Slider, Button, CheckButtons
 import matplotlib.pyplot as plt
 import numpy as np
 #Definimos en coordenadas polares el sistema trifásico desequilibrado
@@ -15,13 +15,14 @@ def cart2polar(x, y):
     modulo = np.sqrt(x**2+y**2)
     arg = np.arctan2(y, x)
     return modulo, arg
+#Dedinimos una función que nos permite obtener en grados el argumento de un número complejo
 def argZ(z):
     theta_rad = np.angle(z)          
     theta_deg = np.degrees(theta_rad)
     return theta_deg
 #Definimos las características de la imagen
 fig, ax = plt.subplots()
-plt.subplots_adjust(right=0.6)
+plt.subplots_adjust(right=0.7, left=0.2)
 plt.xlim(-10,10)
 plt.ylim(-10,10)
 plt.axvline(0, color="k", lw=0.5)
@@ -84,31 +85,31 @@ mod_directa = abs(Zsec_directa_fa)
 arg_directa_fa = argZ(Zsec_directa_fa)
 arg_directa_fb = argZ(Zsec_directa_fb)
 arg_directa_fc = argZ(Zsec_directa_fc)
-texto_sec_directa_fa=ax.text(14, 0, f"$U_{{a_1}}=${mod_directa:.2f}∠{arg_directa_fa:.2f}", 
+texto_sec_directa_fa=ax.text(15, 0, f"$U_{{a_1}}=${mod_directa:.2f}∠{arg_directa_fa:.2f}", 
         fontsize=13, color="k")
-texto_sec_directa_fb=ax.text(14, -1, f"$U_{{b_1}}=${mod_directa:.2f}∠{arg_directa_fb:.2f}", 
+texto_sec_directa_fb=ax.text(15, -1, f"$U_{{b_1}}=${mod_directa:.2f}∠{arg_directa_fb:.2f}", 
         fontsize=13, color="k")
-texto_sec_directa_fc=ax.text(14, -2, f"$U_{{c_1}}=${mod_directa:.2f}∠{arg_directa_fc:.2f}", 
+texto_sec_directa_fc=ax.text(15, -2, f"$U_{{c_1}}=${mod_directa:.2f}∠{arg_directa_fc:.2f}", 
         fontsize=13, color="k")
 #Secuencia inversa
 mod_inversa = abs(Zsec_inversa_fa)
 arg_inversa_fa = argZ(Zsec_inversa_fa)
 arg_inversa_fb = argZ(Zsec_inversa_fb)
 arg_inversa_fc = argZ(Zsec_inversa_fc)
-texto_sec_inversa_fa=ax.text(14, -7, f"$U_{{a_2}}=${mod_inversa:.2f}∠{arg_inversa_fa:.2f}", 
+texto_sec_inversa_fa=ax.text(15, -7, f"$U_{{a_2}}=${mod_inversa:.2f}∠{arg_inversa_fa:.2f}", 
         fontsize=13, color="k")
-texto_sec_inversa_fb=ax.text(14, -8, f"$U_{{b_2}}=${mod_inversa:.2f}∠{arg_inversa_fb:.2f}", 
+texto_sec_inversa_fb=ax.text(15, -8, f"$U_{{b_2}}=${mod_inversa:.2f}∠{arg_inversa_fb:.2f}", 
         fontsize=13, color="k")
-texto_sec_inversa_fc=ax.text(14, -9, f"$U_{{c_2}}=${mod_inversa:.2f}∠{arg_inversa_fc:.2f}", 
+texto_sec_inversa_fc=ax.text(15, -9, f"$U_{{c_2}}=${mod_inversa:.2f}∠{arg_inversa_fc:.2f}", 
         fontsize=13, color="k")
 
 #Definimos los ejes del slider
-eje_modulofa = plt.axes([0.72, 0.8, 0.2, 0.02])
-eje_angulofa = plt.axes([0.72, 0.75, 0.2, 0.02])
-eje_modulofb = plt.axes([0.72, 0.6, 0.2, 0.02])
-eje_angulofb = plt.axes([0.72, 0.55, 0.2, 0.02])
-eje_modulofc = plt.axes([0.72, 0.35, 0.2, 0.02])
-eje_angulofc = plt.axes([0.72, 0.3, 0.2, 0.02])
+eje_modulofa = plt.axes([0.75, 0.8, 0.2, 0.02])
+eje_angulofa = plt.axes([0.75, 0.75, 0.2, 0.02])
+eje_modulofb = plt.axes([0.75, 0.6, 0.2, 0.02])
+eje_angulofb = plt.axes([0.75, 0.55, 0.2, 0.02])
+eje_modulofc = plt.axes([0.75, 0.35, 0.2, 0.02])
+eje_angulofc = plt.axes([0.75, 0.3, 0.2, 0.02])
 
 #Definimos los sliders
 slider_modulofa = Slider(eje_modulofa, "Modulo A", 0, 10, valinit=5)
@@ -119,8 +120,23 @@ slider_modulofc = Slider(eje_modulofc, "Modulo C", 0, 10, valinit=5)
 slider_angulofc = Slider(eje_angulofc, "Arg C", 0, 360, valinit=210)
 sliders = [slider_modulofa, slider_angulofa,  slider_modulofb, slider_angulofb, slider_modulofc, slider_angulofc]
 #Boton de reseteo
-ax_button = plt.axes([0.83, 0.15, 0.1, 0.04])
+ax_button = plt.axes([0.8, 0.07, 0.1, 0.04])
 boton = Button(ax_button, "Reset")
+#Botones de CheckButtons
+ax_check = plt.axes([0.03, 0.7, 0.1, 0.1])
+checklist = CheckButtons(ax_check, ["Fase A", "Fase B", "Fase C"], [True, True, True])
+#Función para actualizar checklist
+def actualizar(label):
+    if label == "Fase A":
+        quiver_faseA.set_visible(not quiver_faseA.get_visible())
+    elif label == "Fase B":
+        quiver_faseB.set_visible(not quiver_faseB.get_visible())
+    elif label == "Fase C":
+        quiver_faseC.set_visible(not quiver_faseC.get_visible())
+    plt.draw()
+
+checklist.on_clicked(actualizar)
+        
 #Funcion que ejecuta el reset
 def reset(event):
         for s in sliders:
@@ -192,6 +208,7 @@ for s in sliders:
 plt.show()
     
     
+
 
 
 
