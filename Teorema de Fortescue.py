@@ -23,6 +23,10 @@ def argZ(z):
 #Definimos las características de la imagen
 fig, ax = plt.subplots()
 plt.subplots_adjust(right=0.7, left=0.2)
+#fig, (ax, ax_time) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 8))
+
+
+
 plt.xlim(-10,10)
 plt.ylim(-10,10)
 plt.axvline(0, color="k", lw=0.5)
@@ -123,8 +127,10 @@ sliders = [slider_modulofa, slider_angulofa,  slider_modulofb, slider_angulofb, 
 ax_button = plt.axes([0.8, 0.07, 0.1, 0.04])
 boton = Button(ax_button, "Reset")
 #Botones de CheckButtons
-ax_check = plt.axes([0.03, 0.7, 0.1, 0.1])
+ax_check = plt.axes([0.02, 0.65, 0.12, 0.12])
+ax_check.set_facecolor("lightgray")
 checklist = CheckButtons(ax_check, ["Fase A", "Fase B", "Fase C"], [True, True, True])
+
 #Función para actualizar checklist
 def actualizar(label):
     if label == "Fase A":
@@ -142,7 +148,7 @@ def actualizar(label):
     plt.draw()
 
 checklist.on_clicked(actualizar)
-        
+
 #Funcion que ejecuta el reset
 def reset(event):
         for s in sliders:
