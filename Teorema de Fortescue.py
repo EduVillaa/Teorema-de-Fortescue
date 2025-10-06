@@ -129,10 +129,16 @@ checklist = CheckButtons(ax_check, ["Fase A", "Fase B", "Fase C"], [True, True, 
 def actualizar(label):
     if label == "Fase A":
         quiver_faseA.set_visible(not quiver_faseA.get_visible())
+        quiver_sec_directa_fa.set_visible(not quiver_sec_directa_fa.get_visible())
+        quiver_sec_inversa_fa.set_visible(not quiver_sec_inversa_fa.get_visible())
     elif label == "Fase B":
         quiver_faseB.set_visible(not quiver_faseB.get_visible())
+        quiver_sec_directa_fb.set_visible(not quiver_sec_directa_fb.get_visible())
+        quiver_sec_inversa_fb.set_visible(not quiver_sec_inversa_fb.get_visible())
     elif label == "Fase C":
         quiver_faseC.set_visible(not quiver_faseC.get_visible())
+        quiver_sec_directa_fc.set_visible(not quiver_sec_directa_fc.get_visible())
+        quiver_sec_inversa_fc.set_visible(not quiver_sec_inversa_fc.get_visible())
     plt.draw()
 
 checklist.on_clicked(actualizar)
